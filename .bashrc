@@ -1,9 +1,17 @@
 # Interactive only
 [ -n "$PS1" ] || return
 
+
 ##############################################################################
 # Environment options
 ##############################################################################
+
+# PATH (in reverse priority order)
+PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+[[ -d "/usr/local/sbin" ]] && PATH="/usr/local/sbin:$PATH"
+[[ -d "/usr/local/bin" ]] && PATH="/usr/local/bin:$PATH"
+[[ -d "$HOME/.bin" ]] && PATH="$HOME/.bin:$PATH"
+export PATH
 
 # Make vim the default editor
 export EDITOR="vim"
