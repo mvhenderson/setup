@@ -1,0 +1,37 @@
+[user]
+	name = Michael Henderson
+	email = mvhenderson@tds.net
+
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+
+[color]
+	ui = auto
+
+[diff]
+	tool = vimdiff
+	guitool = sourcetree
+
+[difftool]
+	prompt = false
+
+[merge]
+	tool = sourcetree
+	conflictstyle = diff3
+	log = true
+
+[mergetool]
+	prompt = false
+	keepBackup = false
+	
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[push]
+	default = simple
