@@ -8,18 +8,21 @@
 #  http://osxnotes.net/defaults.html
 #
 # Reference
-#   defaults read [domain [key]]
-#   defaults write domain { plist | key 'value' }
-#
+#  defaults read [domain [key]]
+#  defaults write domain { plist | key 'value' }
 #  /usr/bin/osascript -e 'tell application "System Events" to tell appearance preferences to get properties'
-#
-# QUESTIONS
-# - Does it matter using -bool true vs -int 1 ?? Seems defaults read ALWAYS returns int...if we use bool, will be tough to enchance to skip if value hasn't changed....
-#
 
-# Logging
+#############################################################################
+# Utility Functions
+#############################################################################
+
+# Headers
 function h1()  { echo "\n\033[1m\033[4m$@\033[0m"; }
 function h2()  { echo "\n \033[1m$@\033[0m"; }
+
+# Log success/failure
+#		$1 - exit code of command
+#		$2 - message to print
 function log() {
 	local exit=$1
 	if [[ $exit -eq 0 ]];	then
@@ -29,7 +32,11 @@ function log() {
 	fi
 }
 
-#; Change preference showing both before/after values
+# Change preference showing both before/after values
+#		$1 - domain
+#		$2 - key
+#		$3 - type
+#		$4 - value
 function set_default () {
 	local before=`/usr/bin/defaults read $1 $2 2>/dev/null`
 	if [[ "$before" == "$4" ]]; then
@@ -40,7 +47,9 @@ function set_default () {
 	fi
 }
 
-#; Change appearance preferance via AppleScript
+# Change appearance preferance via AppleScript
+#		$1 property name
+#		$2 value
 function set_appearance () {
 	local before=$(/usr/bin/osascript -e 'tell application "System Events" to tell appearance preferences to get '"$1" 2>/dev/null)
 	if [[ "$before" == "$2" ]]; then
@@ -51,6 +60,9 @@ function set_appearance () {
 	fi
 }
 
+#############################################################################
+# System Preferences
+#############################################################################
 h1 "System Preferences"
 	h2 "General"
 		# Appearance
@@ -131,6 +143,10 @@ h1 "System Preferences"
 	# h2 "Startup Disk"
 	# h2 "Time Machine"
 	# h2 "Accessibility"
+
+#############################################################################
+# Hidden Settings
+#############################################################################
 
 # h1 "Hidden Settings"
 
