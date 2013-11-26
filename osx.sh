@@ -119,7 +119,7 @@ h1 "System Preferences"
 			# Screen Saver
 				# NOTE: screen saver turned off, let power mgmt deal with this
 				/usr/bin/defaults -currentHost write com.apple.screensaver '{ idleTime = 0; moduleDict = { moduleName = "Computer Name"; path = "/System/Library/Frameworks/ScreenSaver.framework/Resources/Computer Name.saver"; type = 0; }; }';
-				log $? "turned off"
+				log $? "Turned off"
 		h3 "Hot Corners"
 			# Bottom Left: sleep
 				# TODO: document possible values
@@ -147,7 +147,9 @@ h1 "System Preferences"
 			# scale - Scale effect
 			set_default com.apple.dock 'mineffect' -string 'genie'
 		# Double-click window title bar to minimize
-			# TODO: doesn't appear to be in com.apple.dock prefs
+			# 0 - no (default)
+			# 1 - yes
+			set_default -g 'AppleMiniaturizeOnDoubleClick' -int 0
 		# Minimize windows into application icon
 			# 0 - no (default)
 			# 1 - yes
@@ -164,8 +166,30 @@ h1 "System Preferences"
 			# 0 - no
 			# 1 - yes (default)
 			set_default com.apple.dock 'show-process-indicators' -int 1
+	h2 "Misson Control"
+		# TODO: double check all defaults here
+		# Show Dashboard as a Space
+			# 0 - show (default)
+			# 1 - hide
+			set_default com.apple.dock 'dashboard-in-overlay' -int 1
+		# Automatically rearrange Spaces based on most recent use
+			# 0 - no
+			# 1 - yes (default)
+			set_default com.apple.dock 'mru-spaces' -int 1
+		# When switching to an application, switch to a Space with open windows
+			# 0 - no
+			# 1 - yes (default)
+			# TODO -- set_default ?
+		# Group windows by application
+			# 0 - no
+			# 1 - yes (default)
+			set_default com.apple.dock 'expose-group-by-app' -int 1
+		# Displays have separate Spaces
+			# 0 - no
+			# 1 - yes (default)
+			# TODO - set_default ?
 
-	# h2 "Misson Control"
+
 	# h2 "Language & Region"
 	# h2 "Security & Privacy"
 	# h2 "Spotlight"
