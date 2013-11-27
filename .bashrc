@@ -221,3 +221,11 @@ function git_info() {
 export PS1="\[\e]2;\w\a\]\[\e]1;\W\a\]\n\[${CYAN}\]\h \[$YELLOW\]\w\$(git_info)\[$DEFAULT\]\n\$ \[$RESET\]"
 export PS2="\[$ORANGE\]→ \[$RESET\]"
 export SUDO_PS1="\n\[${CYAN}\]\h \[$YELLOW\]\w\n\[$BGRED$WHITE\][\u] #\[$RESET\] "
+
+
+##############################################################################
+# Completion
+##############################################################################
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
