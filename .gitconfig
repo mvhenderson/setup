@@ -26,11 +26,18 @@
 	keepBackup = false
 	
 [difftool "sourcetree"]
-	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
+	cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\"
 	path = 
 
 [mergetool "sourcetree"]
 	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	trustExitCode = true
+
+[difftool "bc4"]
+	cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\"
+
+[mergetool "bc4"]
+	cmd = /usr/local/bin/bcomp \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
 	trustExitCode = true
 
 [push]
