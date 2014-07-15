@@ -10,6 +10,7 @@
 PATH="/usr/bin:/bin:/usr/sbin:/sbin"
 [[ -d "/usr/local/sbin" ]] && PATH="/usr/local/sbin:$PATH"
 [[ -d "/usr/local/bin" ]] && PATH="/usr/local/bin:$PATH"
+[[ -d "/usr/texbin" ]] && PATH="/usr/texbin:$PATH"
 [[ -d "$HOME/.bin" ]] && PATH="$HOME/.bin:$PATH"
 export PATH
 
@@ -230,6 +231,13 @@ export SUDO_PS1="\n\[${CYAN}\]\h \[$YELLOW\]\w\n\[$BGRED$WHITE\][\u] #\[$RESET\]
 ##############################################################################
 # Completion
 ##############################################################################
+
+# Add tab completion for many Bash commands
+if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+    source "$(brew --prefix)/etc/bash_completion";
+elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion;
+fi;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2)" scp sftp ssh
